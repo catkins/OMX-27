@@ -1,0 +1,24 @@
+name: run checks
+on: [push, pull_request]
+
+jobs:
+  check-compilation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Arduino CLI
+        uses: arduino/setup-arduino-cli@v1.1.1
+
+      # setup teensyduino
+
+      - name: Run Arduino linters
+        uses: arduino/arduino-lint-action@v1
+        with:
+          project-type: sketch
+          library-manager: update
+          compliance: strict
+
+
+
